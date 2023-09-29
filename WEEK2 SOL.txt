@@ -1,0 +1,133 @@
+C:\Users\scott>cd..
+
+C:\Users>cd..
+
+C:\>cd sqlite3
+
+C:\sqlite3>sqlite3 stud.db
+
+SQLite version 3.36.0 2021-06-18 18:36:39
+Enter ".help" for usage hints.
+ 
+		create table stud
+    	(
+    		int id PRIMARY KEY,
+   		varchar name(20)
+    	);
+ insert into stud values(1,'urvi');
+
+ insert into stud values(2,'urvashi');
+
+ insert into stud values(3,'bhumi');
+
+ insert into stud values(4,'kinjal');
+
+ insert into stud values(5,'siya');
+
+ insert into stud values(6,'khusi');
+
+ insert into stud values(7,'isha');
+
+ insert into stud values(8,'heni');
+
+ insert into stud values(9,'mansi');
+
+ insert into stud values(10,'kashish');
+
+ select*from stud;
+
+1|urvi
+2|urvashi
+3|bhumi
+4|kinjal
+5|siya
+6|khusi
+7|isha
+8|heni
+9|mansi
+10|kashish
+
+ .mode table
+ select*from stud;
+
++-----+---------+
+| int | varchar |
++-----+---------+
+| 1   | urvi    |
+| 2   | urvashi |
+| 3   | bhumi   |
+| 4   | kinjal  |
+| 5   | siya    |
+| 6   | khusi   |
+| 7   | isha    |
+| 8   | heni    |
+| 9   | mansi   |
+| 10  | kashish |
++-----+---------+
+ create table stud_deatils
+    (
+    id int reference stud,
+    city varchar(20),
+    mobile_no int
+    );
+
+    insert into stud_deatils values(1,'surat','9925474638');
+    insert into stud_deatils values(2,'bardoli','7387243425');
+    insert into stud_deatils values(3,'baroda','8739298764');
+    insert into stud_deatils values(4,'delhi','9574098768');
+    insert into stud_deatils values(5,'kolkata','8745456789');
+    insert into stud_deatils values(6,'surat','67584567');
+    insert into stud_deatils values(7,'surat','8756098765');
+    insert into stud_deatils values(8,'kolkata','758475439');
+    insert into stud_deatils values(9,'baroda','843494763847');
+    insert into stud_deatils values(10,'surat','9898684865');
+
+ select*from stud_deatils;
++----+---------+--------------+
+| id |  city   |  mobile_no   |
++----+---------+--------------+
+| 1  | surat   | 9925474638   |
+| 2  | bardoli | 7387243425   |
+| 3  | baroda  | 8739298764   |
+| 4  | delhi   | 9574098768   |
+| 5  | kolkata | 8745456789   |
+| 6  | surat   | 67584567     |
+| 7  | surat   | 8756098765   |
+| 8  | kolkata | 758475439    |
+| 9  | baroda  | 843494763847 |
+| 10 | surat   | 9898684865   |
++----+---------+--------------+
+sqlite> select*from stud_deatils where city="surat";
++----+-------+------------+
+| id | city  | mobile_no  |
++----+-------+------------+
+| 6  | surat | 6758*****  |
+| 7  | surat | 8756*****  |
+| 10 | surat | 9898*****  |
+| 1  | surat | 99254***** |
+| 3  | surat | 87392***** |
++----+-------+------------+
+sqlite> select*from stud_deatils where city like"b_%";
++----+--------+------------+
+| id |  city  | mobile_no  |
++----+--------+------------+
+| 2  | baroda | 73872***** |
+| 9  | baroda | 8434*****  |
++----+--------+------------+
+sqlite> update stud_deatils set mobile_no="9575******" where city="surat";
+sqlite> select*from stud_deatils;
++----+---------+------------+
+| id |  city   | mobile_no  |
++----+---------+------------+
+| 4  | delhi   | 9574*****  |
+| 1  | surat   | 9575****** |
+| 5  | kolkata | 8745*****  |
+| 6  | surat   | 9575****** |
+| 7  | surat   | 9575****** |
+| 8  | kolkata | 7584*****  |
+| 10 | surat   | 9575****** |
+| 1  | surat   | 9575****** |
+| 2  | baroda  | 73872***** |
+| 3  | surat   | 9575****** |
+| 9  | baroda  | 8434*****  |
++----+---------+------------+
